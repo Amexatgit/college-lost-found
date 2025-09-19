@@ -70,7 +70,7 @@ export default function Landing() {
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
               Lost & Found
               <span className="block text-3xl md:text-4xl font-normal text-muted-foreground mt-2">
-                College Portal
+                Apcoer's Portal
               </span>
             </h1>
             
