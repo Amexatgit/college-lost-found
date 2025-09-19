@@ -59,9 +59,9 @@ export default function Landing() {
           >
             <div className="flex justify-center mb-8">
               <motion.img
-                src="https://harmless-tapir-303.convex.cloud/api/storage/2e2d52fe-6931-4ea8-a352-70483a057901"
+                src="https://harmless-tapir-303.convex.cloud/api/storage/d4fa9819-5f5e-471f-b19c-5cc00a8f1996"
                 alt="Lost & Found Logo"
-                className="w-20 h-20"
+                className="w-24 h-24 object-contain"
                 animate={{ rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
               />
