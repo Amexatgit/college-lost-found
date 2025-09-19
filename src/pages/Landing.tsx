@@ -59,7 +59,7 @@ export default function Landing() {
           >
             <div className="flex justify-center mb-8">
               <motion.img
-                src="/logo.svg"
+                src="https://harmless-tapir-303.convex.cloud/api/storage/2e2d52fe-6931-4ea8-a352-70483a057901"
                 alt="Lost & Found Logo"
                 className="w-20 h-20"
                 animate={{ rotate: [0, 5, -5, 0] }}
