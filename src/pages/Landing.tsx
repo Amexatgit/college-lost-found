@@ -61,9 +61,7 @@ export default function Landing() {
               <motion.img
                 src="https://harmless-tapir-303.convex.cloud/api/storage/d4fa9819-5f5e-471f-b19c-5cc00a8f1996"
                 alt="Lost & Found Logo"
-                className="w-24 h-24 object-contain"
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
+                className="w-36 h-36 md:w-44 md:h-44 object-contain"
               />
             </div>
             
