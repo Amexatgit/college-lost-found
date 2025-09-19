@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "approve-builds": "pnpm approve-builds",
+    "preinstall": "pnpm approve-builds || true"
   },
   "dependencies": {
     "@convex-dev/auth": "^0.0.86",
