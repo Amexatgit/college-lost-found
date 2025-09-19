@@ -205,6 +205,7 @@ export default function AdminDashboard() {
                       value={newItem.description}
                       onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
                       required
+                      className="bg-white text-foreground placeholder:text-gray-500 dark:bg-neutral-900 dark:text-foreground dark:placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -215,6 +216,7 @@ export default function AdminDashboard() {
                       value={newItem.foundLocation}
                       onChange={(e) => setNewItem({ ...newItem, foundLocation: e.target.value })}
                       required
+                      className="bg-white text-foreground placeholder:text-gray-500 dark:bg-neutral-900 dark:text-foreground dark:placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -225,6 +227,7 @@ export default function AdminDashboard() {
                       value={newItem.collectLocation}
                       onChange={(e) => setNewItem({ ...newItem, collectLocation: e.target.value })}
                       required
+                      className="bg-white text-foreground placeholder:text-gray-500 dark:bg-neutral-900 dark:text-foreground dark:placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -235,7 +238,7 @@ export default function AdminDashboard() {
                         type="file"
                         accept="image/*"
                         onChange={handleFileChange}
-                        className="flex-1"
+                        className="flex-1 bg-white text-foreground file:text-foreground placeholder:text-gray-500 dark:bg-neutral-900 dark:text-foreground"
                       />
                       <Upload className="w-4 h-4 text-muted-foreground" />
                     </div>
