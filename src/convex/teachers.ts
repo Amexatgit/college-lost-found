@@ -8,10 +8,21 @@ export const loginTeacher = mutation({
     password: v.string(),
   },
   handler: async (ctx, args) => {
-    const teacher = await ctx.db
+    let teacher = await ctx.db
       .query("teacherCredentials")
       .withIndex("by_username", (q) => q.eq("username", args.username))
       .unique();
+
+    // Auto-create a demo teacher if not found and using demo credentials
+    if (!teacher && args.username === "teacher1" && args.password === "password123") {
+      const teacherId = await ctx.db.insert("teacherCredentials", {
+        username: "teacher1",
+        password: "password123", // demo only
+        name: "Demo Teacher",
+        email: "demo.teacher@college.edu",
+      });
+      teacher = await ctx.db.get(teacherId);
+    }
 
     if (!teacher || teacher.password !== args.password) {
       throw new Error("Invalid username or password");
