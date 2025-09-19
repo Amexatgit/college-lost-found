@@ -7,14 +7,23 @@ export const ROLES = {
   ADMIN: "admin",
   USER: "user",
   MEMBER: "member",
+  TEACHER: "teacher",
 } as const;
 
 export const roleValidator = v.union(
   v.literal(ROLES.ADMIN),
   v.literal(ROLES.USER),
   v.literal(ROLES.MEMBER),
+  v.literal(ROLES.TEACHER),
 );
 export type Role = Infer<typeof roleValidator>;
+
+export const itemStatusValidator = v.union(
+  v.literal("active"),
+  v.literal("collected"),
+  v.literal("archived"),
+);
+export type ItemStatus = Infer<typeof itemStatusValidator>;
 
 const schema = defineSchema(
   {
@@ -30,14 +39,31 @@ const schema = defineSchema(
       isAnonymous: v.optional(v.boolean()), // is the user anonymous. do not remove
 
       role: v.optional(roleValidator), // role of the user. do not remove
+      teacherId: v.optional(v.id("teacherCredentials")), // teacher ID for admin users
     }).index("email", ["email"]), // index for the email. do not remove or modify
 
-    // add other tables here
+    // Lost items table
+    lostItems: defineTable({
+      description: v.string(),
+      foundLocation: v.string(),
+      collectLocation: v.string(),
+      imageUrl: v.optional(v.string()),
+      imageStorageId: v.optional(v.id("_storage")),
+      status: itemStatusValidator,
+      uploadedBy: v.id("users"),
+      collectedAt: v.optional(v.number()),
+      archivedAt: v.optional(v.number()),
+    })
+      .index("by_status", ["status"])
+      .index("by_uploaded_by", ["uploadedBy"]),
 
-    // tableName: defineTable({
-    //   ...
-    //   // table fields
-    // }).index("by_field", ["field"])
+    // Teacher credentials for admin login
+    teacherCredentials: defineTable({
+      username: v.string(),
+      password: v.string(), // In production, this should be hashed
+      name: v.string(),
+      email: v.optional(v.string()),
+    }).index("by_username", ["username"]),
   },
   {
     schemaValidation: false,
