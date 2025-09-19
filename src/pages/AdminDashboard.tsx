@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { GlassCard } from "@/components/GlassCard";
 import { ItemCard } from "@/components/ItemCard";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery, useMutation, useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
@@ -29,6 +29,7 @@ export default function AdminDashboard() {
   const monthlyStats = useQuery(api.lostItems.getMonthlyStats);
   const addLostItem = useMutation(api.lostItems.addLostItem);
   const markAsCollected = useMutation(api.lostItems.markAsCollected);
+  const generateUploadUrl = useAction(api.files.generateUploadUrl);
 
   useEffect(() => {
     const storedTeacher = localStorage.getItem("teacher");
@@ -62,21 +63,22 @@ export default function AdminDashboard() {
 
     try {
       let imageStorageId;
-      
-      if (selectedFile) {
-        // Upload file to Convex storage
-        const uploadUrl = await fetch("/api/upload", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ filename: selectedFile.name }),
-        }).then(res => res.json());
 
-        await fetch(uploadUrl, {
+      if (selectedFile) {
+        // Get signed upload URL from Convex
+        const url = await generateUploadUrl({});
+        const res = await fetch(url, {
           method: "POST",
+          headers: {
+            "Content-Type": selectedFile.type || "application/octet-stream",
+          },
           body: selectedFile,
         });
-
-        imageStorageId = uploadUrl.storageId;
+        if (!res.ok) {
+          throw new Error("Upload failed");
+        }
+        const { storageId } = await res.json();
+        imageStorageId = storageId;
       }
 
       await addLostItem({
@@ -90,6 +92,9 @@ export default function AdminDashboard() {
       setIsAddDialogOpen(false);
       setNewItem({ description: "", foundLocation: "", collectLocation: "" });
       setSelectedFile(null);
+
+      // Redirect to public Lost Items so it's visible immediately
+      navigate("/lost-items");
     } catch (error) {
       toast.error("Failed to add item");
     } finally {
@@ -101,6 +106,8 @@ export default function AdminDashboard() {
     try {
       await markAsCollected({ itemId: itemId as any });
       toast.success("Item marked as collected!");
+      // Redirect to History so it shows up immediately
+      navigate("/history");
     } catch (error) {
       toast.error("Failed to mark item as collected");
     }

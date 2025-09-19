@@ -86,7 +86,29 @@ export const addLostItem = mutation({
     imageStorageId: v.optional(v.id("_storage")),
   },
   handler: async (ctx, args) => {
-    const user = await getCurrentUser(ctx);
+    // Try to get convex-auth user
+    let user = await getCurrentUser(ctx);
+
+    // Demo fallback: if not signed in via Convex auth, use or create a demo teacher user
+    if (!user) {
+      const demoEmail = "demo.teacher@college.edu";
+      const existingDemo = await ctx.db
+        .query("users")
+        .withIndex("email", (q) => q.eq("email", demoEmail))
+        .unique();
+
+      if (existingDemo) {
+        user = existingDemo;
+      } else {
+        const newUserId = await ctx.db.insert("users", {
+          name: "Demo Teacher",
+          email: demoEmail,
+          role: "teacher",
+        });
+        user = await ctx.db.get(newUserId);
+      }
+    }
+
     if (!user || user.role !== "teacher") {
       throw new Error("Only teachers can add lost items");
     }
