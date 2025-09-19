@@ -22,7 +22,11 @@ export function Navbar() {
     >
       <GlassCard className="flex items-center justify-between p-4">
         <Link to="/" className="flex items-center space-x-2">
-          <img src="/logo.svg" alt="Logo" className="w-8 h-8" />
+          <img
+            src="https://harmless-tapir-303.convex.cloud/api/storage/d4fa9819-5f5e-471f-b19c-5cc00a8f1996"
+            alt="Logo"
+            className="w-8 h-8 object-contain"
+          />
           <span className="font-bold text-lg">Lost & Found</span>
         </Link>
 
