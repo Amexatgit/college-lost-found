@@ -20,6 +20,7 @@ Use pnpm for the package manager.
 ## Setup
 
 This project is set up already and running on a cloud environment, as well as a convex development in the sandbox.
+Live Link : https://silver-squids-chew.vly.sh
 
 ## Environment Variables
 
