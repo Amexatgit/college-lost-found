@@ -1,35 +1,23 @@
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Package, CheckCircle } from "lucide-react";
+import { MapPin, Package, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { GlassCard } from "./GlassCard";
-import { Doc } from "@/convex/_generated/dataModel";
+import { GlassCard } from "./GlassCard.jsx";
 
-interface ItemCardProps {
-  item: Doc<"lostItems"> & { uploaderName?: string };
-  showActions?: boolean;
-  onMarkCollected?: (id: string) => void;
-}
-
-export function ItemCard({ item, showActions = false, onMarkCollected }: ItemCardProps) {
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleDateString("en-US", {
+export function ItemCard({ item, showActions = false, onMarkCollected }) {
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
     });
-  };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status) => {
     switch (status) {
-      case "active":
-        return "bg-green-500/20 text-green-300 border-green-500/30";
-      case "collected":
-        return "bg-blue-500/20 text-blue-300 border-blue-500/30";
-      case "archived":
-        return "bg-gray-500/20 text-gray-300 border-gray-500/30";
-      default:
-        return "bg-gray-500/20 text-gray-300 border-gray-500/30";
+      case "active": return "bg-green-500/20 text-green-300 border-green-500/30";
+      case "collected": return "bg-blue-500/20 text-blue-300 border-blue-500/30";
+      case "archived": return "bg-gray-500/20 text-gray-300 border-gray-500/30";
+      default: return "bg-gray-500/20 text-gray-300 border-gray-500/30";
     }
   };
 
@@ -41,7 +29,6 @@ export function ItemCard({ item, showActions = false, onMarkCollected }: ItemCar
     >
       <GlassCard hover className="h-full">
         <div className="space-y-4">
-          {/* Image */}
           {item.imageUrl && (
             <div className="aspect-video rounded-lg overflow-hidden bg-muted/20">
               <img
@@ -52,22 +39,17 @@ export function ItemCard({ item, showActions = false, onMarkCollected }: ItemCar
             </div>
           )}
 
-          {/* Status Badge */}
           <div className="flex justify-between items-start">
             <Badge className={getStatusColor(item.status)}>
               {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
             </Badge>
             <span className="text-xs text-muted-foreground">
-              {formatDate(item._creationTime)}
+              {formatDate(item.createdAt)}
             </span>
           </div>
 
-          {/* Description */}
-          <div>
-            <h3 className="font-semibold text-lg mb-2">{item.description}</h3>
-          </div>
+          <h3 className="font-semibold text-lg">{item.description}</h3>
 
-          {/* Location Info */}
           <div className="space-y-2">
             <div className="flex items-center space-x-2 text-sm">
               <MapPin className="w-4 h-4 text-muted-foreground" />
@@ -81,14 +63,12 @@ export function ItemCard({ item, showActions = false, onMarkCollected }: ItemCar
             </div>
           </div>
 
-          {/* Uploader Info */}
-          {item.uploaderName && (
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <span>Uploaded by: {item.uploaderName}</span>
-            </div>
+          {item.uploadedBy?.name && (
+            <p className="text-sm text-muted-foreground">
+              Uploaded by: {item.uploadedBy.name}
+            </p>
           )}
 
-          {/* Collection Info */}
           {item.status === "collected" && item.collectedAt && (
             <div className="flex items-center space-x-2 text-sm text-green-300">
               <CheckCircle className="w-4 h-4" />
@@ -96,12 +76,10 @@ export function ItemCard({ item, showActions = false, onMarkCollected }: ItemCar
             </div>
           )}
 
-          {/* Actions */}
           {showActions && item.status === "active" && onMarkCollected && (
             <Button
               onClick={() => onMarkCollected(item._id)}
               className="w-full"
-              variant="default"
             >
               <CheckCircle className="w-4 h-4 mr-2" />
               Mark as Collected

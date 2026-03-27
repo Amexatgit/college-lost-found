@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { Search, Archive, History, Home, LogIn } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
-import { GlassCard } from "./GlassCard";
+import { GlassCard } from "./GlassCard.jsx";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const location = useLocation();
@@ -22,30 +23,20 @@ export function Navbar() {
     >
       <GlassCard className="flex items-center justify-between p-4">
         <Link to="/" className="flex items-center space-x-2">
-          <img
-            src="https://harmless-tapir-303.convex.cloud/api/storage/d4fa9819-5f5e-471f-b19c-5cc00a8f1996"
-            alt="Logo"
-            className="w-8 h-8 object-contain"
-          />
+          <img src="/logo.svg" alt="Logo" className="w-8 h-8" />
           <span className="font-bold text-lg">Lost & Found</span>
         </Link>
-
         <div className="flex items-center space-x-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
-            
             return (
               <Button
                 key={item.path}
                 variant={isActive ? "default" : "ghost"}
                 size="sm"
                 asChild
-                className={cn(
-                  "transition-all duration-200",
-                  // Fix type issue by avoiding boolean in the cn args
-                  isActive ? "bg-primary/20 text-primary" : undefined
-                )}
+                className={cn(isActive && "bg-primary/20 text-primary")}
               >
                 <Link to={item.path} className="flex items-center space-x-2">
                   <Icon className="w-4 h-4" />
@@ -54,7 +45,6 @@ export function Navbar() {
               </Button>
             );
           })}
-          
           <Button variant="outline" size="sm" asChild className="ml-4">
             <Link to="/admin" className="flex items-center space-x-2">
               <LogIn className="w-4 h-4" />
@@ -65,8 +55,4 @@ export function Navbar() {
       </GlassCard>
     </motion.nav>
   );
-}
-
-function cn(...classes: (string | undefined)[]) {
-  return classes.filter(Boolean).join(' ');
 }

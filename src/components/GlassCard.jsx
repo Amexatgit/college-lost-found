@@ -1,20 +1,7 @@
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-interface GlassCardProps {
-  children: ReactNode;
-  className?: string;
-  variant?: "default" | "strong";
-  hover?: boolean;
-}
-
-export function GlassCard({ 
-  children, 
-  className, 
-  variant = "default",
-  hover = false 
-}: GlassCardProps) {
+export function GlassCard({ children, className, variant = "default", hover = false }) {
   return (
     <motion.div
       className={cn(

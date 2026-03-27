@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Search, Archive, History, Users, MapPin, Clock } from "lucide-react";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
-import { GlassCard } from "@/components/GlassCard";
-import { Navbar } from "@/components/Navbar";
+import { GlassCard } from "@/components/GlassCard.jsx";
+import { Navbar } from "@/components/Navbar.jsx";
 
 export default function Landing() {
   const features = [
@@ -41,14 +41,10 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background Gradient Orbs */}
       <div className="gradient-orb gradient-orb-1" />
       <div className="gradient-orb gradient-orb-2" />
       <div className="gradient-orb gradient-orb-3" />
-      
       <Navbar />
-      
-      {/* Hero Section */}
       <div className="pt-32 pb-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <motion.div
@@ -57,26 +53,15 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <div className="flex justify-center mb-8">
-              <motion.img
-                src="https://harmless-tapir-303.convex.cloud/api/storage/d4fa9819-5f5e-471f-b19c-5cc00a8f1996"
-                alt="Lost & Found Logo"
-                className="w-36 h-36 md:w-44 md:h-44 object-contain"
-              />
-            </div>
-            
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
               Lost & Found
               <span className="block text-3xl md:text-4xl font-normal text-muted-foreground mt-2">
-                Apcoer's Portal
+                College Portal
               </span>
             </h1>
-            
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Helping students and faculty reunite with their lost belongings through 
-              our comprehensive digital lost and found system.
+              Helping students and faculty reunite with their lost belongings.
             </p>
-            
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button size="lg" asChild className="text-lg px-8 py-6">
                 <Link to="/lost-items">
@@ -95,15 +80,9 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* Stats Section */}
       <div className="px-4 mb-20">
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
@@ -114,81 +93,34 @@ export default function Landing() {
                 </GlassCard>
               );
             })}
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Features Section */}
-      <div className="px-4 pb-20">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our platform makes it easy to report, browse, and reclaim lost items
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                >
-                  <GlassCard hover className="h-full text-center group cursor-pointer">
-                    <Link to={feature.link} className="block">
-                      <Icon className="w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-200" />
-                      <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </Link>
-                  </GlassCard>
-                </motion.div>
-              );
-            })}
           </div>
         </div>
       </div>
 
-      {/* CTA Section */}
       <div className="px-4 pb-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <GlassCard variant="strong" className="p-12">
-              <h2 className="text-3xl font-bold mb-4">Lost Something?</h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Check our database of found items or contact the administration 
-                to report your lost belongings.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
-                  <Link to="/lost-items">
-                    <Search className="w-5 h-5 mr-2" />
-                    Search Lost Items
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Our platform makes it easy to report, browse, and reclaim lost items
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <GlassCard key={index} hover className="h-full text-center group cursor-pointer">
+                  <Link to={feature.link} className="block">
+                    <Icon className="w-12 h-12 mx-auto mb-4 text-primary group-hover:scale-110 transition-transform duration-200" />
+                    <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
                   </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/history">
-                    <History className="w-5 h-5 mr-2" />
-                    View History
-                  </Link>
-                </Button>
-              </div>
-            </GlassCard>
-          </motion.div>
+                </GlassCard>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
