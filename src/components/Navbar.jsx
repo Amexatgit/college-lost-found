@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
-import { Search, Archive, History, Home, LogIn } from "lucide-react";
+import { useState } from "react";
+import { Search, Archive, History, Home, LogIn, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { Button } from "@/components/ui/button";
-import { GlassCard } from "./GlassCard.jsx";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const navItems = [
     { path: "/", label: "Home", icon: Home },
@@ -16,43 +16,100 @@ export function Navbar() {
   ];
 
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-4xl px-4"
-    >
-      <GlassCard className="flex items-center justify-between p-4">
-        <Link to="/" className="flex items-center space-x-2">
-          <img src="/logo.svg" alt="Logo" className="w-8 h-8" />
-          <span className="font-bold text-lg">Lost & Found</span>
-        </Link>
-        <div className="flex items-center space-x-1">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = location.pathname === item.path;
-            return (
-              <Button
-                key={item.path}
-                variant={isActive ? "default" : "ghost"}
-                size="sm"
-                asChild
-                className={cn(isActive && "bg-primary/20 text-primary")}
-              >
-                <Link to={item.path} className="flex items-center space-x-2">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#e5d5d5] shadow-sm">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+
+          {/* Logo + College Name */}
+          <Link to="/" className="flex items-center space-x-3">
+            <img
+              src="/logo.png"
+              alt="APCOER Logo"
+              className="w-10 h-10 object-contain"
+            />
+            <div className="hidden sm:block">
+              <div className="font-bold text-[#9F2C2C] text-sm leading-tight">
+                APCOER
+              </div>
+              <div className="text-xs text-muted-foreground leading-tight">
+                Lost & Found Portal
+              </div>
+            </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={cn(
+                    "flex items-center space-x-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-[#9F2C2C] text-white"
+                      : "text-gray-600 hover:bg-[#f5f0f0] hover:text-[#9F2C2C]"
+                  )}
+                >
                   <Icon className="w-4 h-4" />
-                  <span className="hidden sm:inline">{item.label}</span>
+                  <span>{item.label}</span>
                 </Link>
-              </Button>
-            );
-          })}
-          <Button variant="outline" size="sm" asChild className="ml-4">
-            <Link to="/admin" className="flex items-center space-x-2">
+              );
+            })}
+            <Link
+              to="/admin"
+              className="flex items-center space-x-1.5 px-3 py-2 rounded-md text-sm font-medium border border-[#9F2C2C] text-[#9F2C2C] hover:bg-[#9F2C2C] hover:text-white transition-colors ml-2"
+            >
               <LogIn className="w-4 h-4" />
-              <span className="hidden sm:inline">Admin</span>
+              <span>Staff Login</span>
             </Link>
-          </Button>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2 rounded-md text-gray-600 hover:text-[#9F2C2C]"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
-      </GlassCard>
-    </motion.nav>
+
+        {/* Mobile Nav */}
+        {mobileOpen && (
+          <div className="md:hidden border-t border-[#e5d5d5] py-3 space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    "flex items-center space-x-2 px-4 py-2.5 rounded-md text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-[#9F2C2C] text-white"
+                      : "text-gray-600 hover:bg-[#f5f0f0] hover:text-[#9F2C2C]"
+                  )}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+            <Link
+              to="/admin"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center space-x-2 px-4 py-2.5 rounded-md text-sm font-medium border border-[#9F2C2C] text-[#9F2C2C] mx-1"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Staff Login</span>
+            </Link>
+          </div>
+        )}
+      </div>
+    </nav>
   );
 }

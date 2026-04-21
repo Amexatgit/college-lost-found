@@ -39,17 +39,18 @@ export default function Admin() {
       <Navbar />
       <div className="pt-32 px-4 pb-20">
         <div className="max-w-md mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-8"
-          >
-            <LogIn className="w-16 h-16 mx-auto mb-4 text-primary" />
-            <h1 className="text-3xl font-bold mb-2">Admin Login</h1>
-            <p className="text-muted-foreground">
-              Teachers and staff can log in to manage lost items
-            </p>
-          </motion.div>
+          
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  className="text-center mb-8"
+>
+  <img src="/logo.png" alt="APCOER" className="w-16 h-16 mx-auto mb-4 object-contain" />
+  <h1 className="text-3xl font-bold text-[#9F2C2C] mb-1">APCOER Staff Login</h1>
+  <p className="text-muted-foreground">
+    Teachers and Class Representatives
+  </p>
+</motion.div>
 
           <GlassCard>
             <form onSubmit={handleLogin} className="space-y-6">

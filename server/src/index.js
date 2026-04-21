@@ -24,7 +24,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
+// serve uploads from root level uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "../../../uploads")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/lost-items", lostItemRoutes);

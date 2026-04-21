@@ -1,9 +1,7 @@
-/* DO NOT CHANGE */
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
-/* DO NOT CHANGE */
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -42,163 +40,111 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* GLASSMORPHISM THEME */
 :root {
-  --radius: 1rem;
-  /* Light theme: subtle grey gradient background */
-  --background: linear-gradient(135deg, #f7f7f8 0%, #eceeef 100%);
-  --foreground: oklch(0.22 0 0); /* near-black text */
+  --radius: 0.75rem;
 
-  /* Surfaces */
-  --card: oklch(1 0 0 / 0.6); /* translucent white */
-  --card-foreground: oklch(0.22 0 0);
-  --popover: oklch(1 0 0 / 0.7);
-  --popover-foreground: oklch(0.22 0 0);
+  --background: #ffffff;
+  --foreground: #1a1a1a;
 
-  /* Primary in neutral grey */
-  --primary: oklch(0.55 0 0); /* neutral grey */
-  --primary-foreground: oklch(0.98 0 0); /* near-white text on primary */
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
 
-  /* Secondary / muted neutrals */
-  --secondary: oklch(1 0 0 / 0.5);
-  --secondary-foreground: oklch(0.35 0 0);
-  --muted: oklch(1 0 0 / 0.4);
-  --muted-foreground: oklch(0.45 0 0);
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
 
-  /* Accent (slightly darker grey) */
-  --accent: oklch(0.6 0 0);
-  --accent-foreground: oklch(0.98 0 0);
+  /* APCOER maroon as primary */
+  --primary: #9F2C2C;
+  --primary-foreground: #ffffff;
 
-  --destructive: oklch(0.55 0.05 25);
-  --border: oklch(0 0 0 / 0.08);
-  --input: oklch(1 0 0 / 0.5);
-  --ring: oklch(0.55 0 0);
+  --secondary: #f5f0f0;
+  --secondary-foreground: #9F2C2C;
 
-  /* Charts (neutral steps) */
-  --chart-1: oklch(0.35 0 0);
-  --chart-2: oklch(0.45 0 0);
-  --chart-3: oklch(0.55 0 0);
-  --chart-4: oklch(0.65 0 0);
-  --chart-5: oklch(0.75 0 0);
+  --muted: #f5f0f0;
+  --muted-foreground: #6b6b6b;
 
-  /* Sidebar neutrals */
-  --sidebar: oklch(1 0 0 / 0.5);
-  --sidebar-foreground: oklch(0.22 0 0);
-  --sidebar-primary: oklch(0.55 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(1 0 0 / 0.6);
-  --sidebar-accent-foreground: oklch(0.35 0 0);
-  --sidebar-border: oklch(0 0 0 / 0.08);
-  --sidebar-ring: oklch(0.55 0 0);
-}
+  --accent: #f5f0f0;
+  --accent-foreground: #9F2C2C;
 
-/* Dark theme: deeper greys */
-.dark {
-  --background: linear-gradient(135deg, #1e1f22 0%, #2a2c30 100%);
-  --foreground: oklch(0.98 0 0);
+  --destructive: #dc2626;
+  --border: #e5d5d5;
+  --input: #e5d5d5;
+  --ring: #9F2C2C;
 
-  --card: oklch(0 0 0 / 0.35);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0 0 0 / 0.45);
-  --popover-foreground: oklch(0.98 0 0);
+  --chart-1: #9F2C2C;
+  --chart-2: #c45c5c;
+  --chart-3: #d48080;
+  --chart-4: #e8b4b4;
+  --chart-5: #f5d5d5;
 
-  --primary: oklch(0.7 0 0);
-  --primary-foreground: oklch(0.1 0 0);
-
-  --secondary: oklch(0 0 0 / 0.35);
-  --secondary-foreground: oklch(0.9 0 0);
-  --muted: oklch(0 0 0 / 0.25);
-  --muted-foreground: oklch(0.75 0 0);
-
-  --accent: oklch(0.6 0 0);
-  --accent-foreground: oklch(0.98 0 0);
-
-  --destructive: oklch(0.62 0.06 15);
-  --border: oklch(1 0 0 / 0.1);
-  --input: oklch(1 0 0 / 0.2);
-  --ring: oklch(0.75 0 0);
-
-  --chart-1: oklch(0.7 0 0);
-  --chart-2: oklch(0.6 0 0);
-  --chart-3: oklch(0.5 0 0);
-  --chart-4: oklch(0.4 0 0);
-  --chart-5: oklch(0.3 0 0);
-
-  --sidebar: oklch(0 0 0 / 0.3);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.7 0 0);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0 0 0 / 0.35);
-  --sidebar-accent-foreground: oklch(0.9 0 0);
-  --sidebar-border: oklch(1 0 0 / 0.1);
-  --sidebar-ring: oklch(0.75 0 0);
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #9F2C2C;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f5f0f0;
+  --sidebar-accent-foreground: #9F2C2C;
+  --sidebar-border: #e5d5d5;
+  --sidebar-ring: #9F2C2C;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   body {
-    @apply text-foreground;
-    background: var(--background);
-    min-height: 100vh;
+    @apply bg-background text-foreground;
   }
-  
+
   button:not([disabled]),
   [role="button"]:not([disabled]) {
     cursor: pointer;
   }
 }
 
-/* Glassmorphism utilities */
+/* APCOER Card style — clean white with subtle maroon border */
 .glass {
-  background: var(--card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: #ffffff;
+  border: 1px solid #e5d5d5;
+  box-shadow: 0 2px 12px 0 rgba(159, 44, 44, 0.08);
+  border-radius: 0.75rem;
 }
 
 .glass-strong {
-  background: oklch(1 0 0 / 0.15);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid var(--border);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
+  background: #ffffff;
+  border: 1px solid #9F2C2C;
+  box-shadow: 0 4px 20px 0 rgba(159, 44, 44, 0.15);
+  border-radius: 0.75rem;
 }
 
+/* subtle maroon gradient orbs — very faint */
 .gradient-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.7;
+  filter: blur(80px);
+  opacity: 0.15;
   pointer-events: none;
 }
 
 .gradient-orb-1 {
-  width: 300px;
-  height: 300px;
-  /* soft light greys */
-  background: linear-gradient(45deg, #e9ecef, #dfe2e6);
-  top: -150px;
-  right: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #9F2C2C, transparent);
+  top: -200px;
+  right: -100px;
 }
 
 .gradient-orb-2 {
-  width: 200px;
-  height: 200px;
-  /* neutral mid greys */
-  background: linear-gradient(45deg, #d7dadd, #caced3);
-  bottom: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #9F2C2C, transparent);
+  bottom: -150px;
   left: -100px;
 }
 
 .gradient-orb-3 {
-  width: 150px;
-  height: 150px;
-  /* slightly darker greys for depth */
-  background: linear-gradient(45deg, #c5c8cc, #b7bbc0);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #9F2C2C, transparent);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
