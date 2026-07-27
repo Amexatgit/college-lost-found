@@ -13,21 +13,6 @@ This project uses the following tech stack:
 - Framer Motion (for animations)
 - Three js (for 3d models)
 
-All relevant files live in the 'src' directory.
-
-Use pnpm for the package manager.
-
-## Setup
-
-This project is set up already and running on a cloud environment, as well as a convex development in the sandbox.
-Live Link : https://silver-squids-chew.vly.sh
-
-## Environment Variables
-
-The project is set up with project specific CONVEX_DEPLOYMENT and VITE_CONVEX_URL environment variables on the client side.
-
-The convex server has a separate set of environment variables that are accessible by the convex backend.
-
-Currently, these variables include auth-specific keys: JWKS, JWT_PRIVATE_KEY, and SITE_URL.
+Migrating from typescript to Java Script ( Under Progress)
 
 
